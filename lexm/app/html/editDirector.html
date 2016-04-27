@@ -1,0 +1,8 @@
+<section data-ng-hide="!director.showEdit">
+  <form data-ng-submit="dirctrl.putDirector(dirEdit)">
+    <input type="text" data-ng-model="dirEdit.name" data-ng-init="dirEdit.name=director.name">
+    <input type="text" data-ng-model="dirEdit.date_of_birth" data-ng-init="dirEdit.date_of_birth=director.date_of_birth">
+    <button type="submit">Submit Edit</button>
+    <button ng-click="dirctrl.cancelEdit(dirEdit, director)">Cancel Edit</button>
+  </form>
+</section>
