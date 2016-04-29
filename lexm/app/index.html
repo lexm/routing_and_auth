@@ -8,42 +8,29 @@
       display: none !important;
     }
   </style>
+  <!-- load angular and angular route via CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
 </head>
 <body class="ng-cloak" data-ng-app="MovieApp">
+  <header>
+    <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Angular Routing Example</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#movies"><i class="fa fa-movies"></i> Movies</a></li>
+            <li><a href="#directors"><i class="fa fa-directors"></i> Directors</a></li>
+        </ul>
+    </div>
+    </nav>
+</header>
   <main>
-  <section data-ng-init="moviectrl.getMovies()" data-ng-controller="MovieController as moviectrl">
-    <h1>Movies</h1>
-    <ul>
-      <li data-ng-repeat="movie in moviectrl.movies" data-ng-init="movEdit._id=movie._id">
-        <p>Movie Title: {{movie.name}}</p>
-        <p>Release Date: {{movie.release_date | amDateFormat:'MMMM Do YYYY'}}</p>
-        <edit-movie></edit-movie>
-        <p>
-          <button data-ng-click="moviectrl.removeMovie(movie)">Delete</button>
-          <button data-ng-click="moviectrl.showEditFlip(movie)">Edit</button>
-        </p>
-      </li>
-    </ul>
-    <create-movie></create-movie>
-  </section>
-
-  <section data-ng-init="dirctrl.getDirectors()" data-ng-controller="DirectorController as dirctrl">
-    <h1>Directors</h1>
-    <ul>
-      <li data-ng-repeat="director in dirctrl.directors" data-ng-init="dirEdit._id=director._id">
-        <p>Director Name: {{director.name}}</p>
-        <p>Date of Birth: {{director.date_of_birth | amDateFormat:'MMMM Do YYYY'}}</p>
-        <edit-director></edit-director>
-        <p>
-          <button data-ng-click="dirctrl.removeDirector(director)">Delete</button>
-          <button data-ng-click="dirctrl.showEditFlip(director)">Edit</button>
-        </p>
-      </li>
-    </ul>
-    <create-director></create-director>
-  </section>
-
-</main>
+    <div ng-view></div>
+  </main>
   <script src="./bundle.js" type="text/javascript"></script>
 </body>
 </html>

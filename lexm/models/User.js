@@ -1,31 +1,37 @@
 'use strict';
 
 module.exports = (mongoose, models) => {
-  var mongoose = require('mongoose');
+  // var mongoose = require('mongoose');
   var bcrypt = require('bcrypt');
   var jwt = require('jsonwebtoken');
   var config = require(__dirname + '/../config/dbconfig');
 
   var userSchema = mongoose.Schema({
-    name: {
+    username: {
       type: String,
       required: true,
       unique: true
     },
-    group: String,
-    password: {
-      type: String,
-      required: true
+    authentication: {
+      email: {
+        type: String,
+        required: true
+      },
+      group: String,
+      password: {
+        type: String,
+        required: true
+      }
     }
   });
 
   userSchema.pre('save', function(next) {
-    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+    this.authentication.password = bcrypt.hashSync(this.authentication.password, bcrypt.genSaltSync(10));
     next();
   });
 
   userSchema.methods.compareHash = function(password) {
-    return bcrypt.compareSync(password, this.password);
+    return bcrypt.compareSync(password, this.authentication.password);
   };
 
   userSchema.methods.generateToken = function() {
@@ -35,4 +41,4 @@ module.exports = (mongoose, models) => {
   var User = mongoose.model('User', userSchema);
   models.User = User;
 
-}
+};

@@ -1,0 +1,15 @@
+<section data-ng-init="moviectrl.getMovies()" data-ng-controller="MovieController as moviectrl">
+  <h1>Movies</h1>
+  <ul>
+    <li data-ng-repeat="movie in moviectrl.movies" data-ng-init="movEdit._id=movie._id">
+      <p>Movie Title: {{movie.name}}</p>
+      <p>Release Date: {{movie.release_date | amDateFormat:'MMMM Do YYYY'}}</p>
+      <edit-movie></edit-movie>
+      <p>
+        <button data-ng-click="moviectrl.removeMovie(movie)">Delete</button>
+        <button data-ng-click="moviectrl.showEditFlip(movie)">Edit</button>
+      </p>
+    </li>
+  </ul>
+  <create-movie></create-movie>
+</section>

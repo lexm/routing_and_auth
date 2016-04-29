@@ -1,0 +1,15 @@
+<section data-ng-init="dirctrl.getDirectors()" data-ng-controller="DirectorController as dirctrl">
+  <h1>Directors</h1>
+  <ul>
+    <li data-ng-repeat="director in dirctrl.directors" data-ng-init="dirEdit._id=director._id">
+      <p>Director Name: {{director.name}}</p>
+      <p>Date of Birth: {{director.date_of_birth | amDateFormat:'MMMM Do YYYY'}}</p>
+      <edit-director></edit-director>
+      <p>
+        <button data-ng-click="dirctrl.removeDirector(director)">Delete</button>
+        <button data-ng-click="dirctrl.showEditFlip(director)">Edit</button>
+      </p>
+    </li>
+  </ul>
+  <create-director></create-director>
+</section>
