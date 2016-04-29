@@ -5,6 +5,7 @@ var clean = require('gulp-clean');
 var eslint = require('gulp-eslint');
 var mocha = require('gulp-mocha');
 var webpack = require('webpack-stream');
+var sass = require('gulp-sass');
 
 var eslintRules = {
   'rules': {
@@ -47,7 +48,7 @@ var eslintRules = {
 };
 
 var paths = {
-  css:  ['app/*.css'],
+  styles:  ['app/sass/*.sass'],
   html: ['app/*.html'],
   js:   ['app/js/*.js', 'test/*.js'],
   test: ['test/*_spec.js']
@@ -73,9 +74,15 @@ gulp.task('build:html', function() {
   .pipe(gulp.dest('public/html'));
 });
 
-gulp.task('build:css', function() {
-  gulp.src('app/*.css')
-  .pipe(gulp.dest('public/'));
+// gulp.task('build:css', function() {
+//   gulp.src('app/*.css')
+//   .pipe(gulp.dest('public/'));
+// });
+
+gulp.task('build:styles', function() {
+  gulp.src('app/sass/*.sass')
+  .pipe(sass().on('error', sass.logError))
+  .pipe(gulp.dest('./public'));
 });
 
 gulp.task('build:js', function() {
@@ -90,8 +97,8 @@ gulp.task('build:test', () => {
     .pipe(gulp.dest('./test'));
 });
 
-gulp.task('watch:css', function() {
-  gulp.watch(paths.css, ['build:css']);
+gulp.task('watch:styles', function() {
+  gulp.watch(paths.styles, ['build:styles']);
 });
 
 gulp.task('watch:html', function() {
@@ -107,9 +114,9 @@ gulp.task('clean', function() {
         .pipe(clean({force: true}));
 });
 
-gulp.task('build:all', ['build:css', 'build:html', 'build:js']);
+gulp.task('build:all', ['build:styles', 'build:html', 'build:js']);
 
-gulp.task('watch:all', ['watch:css', 'watch:html', 'watch:js']);
+gulp.task('watch:all', ['watch:styles', 'watch:html', 'watch:js']);
 
 gulp.task('default', ['build:all', 'watch:all']);
 

@@ -28,6 +28,11 @@ app.config(function($routeProvider) {
       templateUrl: 'html/moviePage.html',
       controller: 'MovieController'
     })
+    .when('/signup', {
+      controller: 'UserController',
+      controllerAs: 'userctrl',
+      templateUrl: 'html/signup_in.html'
+    })
     .otherwise({
       redirectTo: '/home'
       // templateUrl: 'html/homePage.html',
