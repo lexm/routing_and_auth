@@ -25,10 +25,15 @@ module.exports = (mongoose, models) => {
     }
   });
 
-  userSchema.pre('save', function(next) {
-    this.authentication.password = bcrypt.hashSync(this.authentication.password, bcrypt.genSaltSync(10));
-    next();
-  });
+  // userSchema.pre('save', function(next) {
+  //   this.authentication.password = bcrypt.hashSync(this.authentication.password, bcrypt.genSaltSync(10));
+  //   next();
+  // });
+
+  userSchema.methods.hashPassword = function(password) {
+    var hash = this.authentication.password = bcrypt.hashSync(password, 8);
+    return hash;
+  };
 
   userSchema.methods.compareHash = function(password) {
     return bcrypt.compareSync(password, this.authentication.password);

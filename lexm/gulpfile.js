@@ -49,7 +49,7 @@ var eslintRules = {
 
 var paths = {
   styles:  ['app/sass/*.sass'],
-  html: ['app/*.html'],
+  html: ['app/*.html', 'app/html/*.html', 'app/html/template/*.html'],
   js:   ['app/js/*.js', 'test/*.js'],
   test: ['test/*_spec.js']
 };
@@ -72,6 +72,8 @@ gulp.task('build:html', function() {
   .pipe(gulp.dest('public/'));
   gulp.src('app/html/*.html')
   .pipe(gulp.dest('public/html'));
+  gulp.src('app/html/template/*.html')
+  .pipe(gulp.dest('public/html/template'));
 });
 
 // gulp.task('build:css', function() {
