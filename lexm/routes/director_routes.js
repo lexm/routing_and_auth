@@ -3,10 +3,6 @@
 module.exports = (router, models) => {
   var Director = models.Director;
 
-  // Auth disabled while setting up Angular; add back later
-  // var authJwt = require(__dirname + '/../lib/auth_jwt');
-  // router.use(authJwt);
-
   router.route('/')
   .get((req, res) => {
     Director.find({}, (err, directors) => {
@@ -64,12 +60,12 @@ module.exports = (router, models) => {
     Director.findById(req.params.id, (err, director) => {
       if (err) return res.send(err);
       if (!director) {
-        return res.json({msg: 'no director found'})
+        return res.json({msg: 'no director found'});
       }
       director.remove(() => {
         res.json({message: 'director removed'});
       });
     });
-  })
+  });
 
-}
+};

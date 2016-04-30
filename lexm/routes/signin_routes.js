@@ -2,8 +2,9 @@
 
 module.exports = (router, models) => {
   var express = require('express');
-  var User = require(__dirname + '/../models/User');
+  var User = models.User;
   var jsonParser = require('body-parser').json();
+
   var basicHTTP = require(__dirname + '/../lib/basic_http');
 
   router.get('/', basicHTTP, (req, res) => {
@@ -17,15 +18,6 @@ module.exports = (router, models) => {
       res.json({token: user.generateToken()});
     });
 
-
-    // var newUser = new User();
-    // newUser.username = req.body.username || req.body.email;
-    // newUser.authentication.email = req.body.email;
-    // newUser.hashPassword(req.body.password);
-    // newUser.save((err, data) => {
-    //   if (err) return handleDBError(err, res);
-    //   res.status(200).json({token: data.generateToken()});
-    // });
   });
 
 };

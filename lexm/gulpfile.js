@@ -76,11 +76,6 @@ gulp.task('build:html', function() {
   .pipe(gulp.dest('public/html/template'));
 });
 
-// gulp.task('build:css', function() {
-//   gulp.src('app/*.css')
-//   .pipe(gulp.dest('public/'));
-// });
-
 gulp.task('build:styles', function() {
   gulp.src('app/sass/*.sass')
   .pipe(sass().on('error', sass.logError))

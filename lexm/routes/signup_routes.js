@@ -1,11 +1,9 @@
 'use strict';
 
 module.exports = (router, models) => {
-  // var express = require('express');
   var User = models.User;
   var jsonParser = require('body-parser').json();
   var handleDBError = require(__dirname + '/../lib/handle_db_error');
-  // var basicHTTP = require(__dirname + '/../lib/basic_http');
 
   router.post('/', jsonParser, (req, res) => {
     var newUser = new User();

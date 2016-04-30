@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = (mongoose, models) => {
-  // var mongoose = require('mongoose');
   var bcrypt = require('bcrypt');
   var jwt = require('jsonwebtoken');
   var config = require(__dirname + '/../config/dbconfig');
@@ -24,11 +23,6 @@ module.exports = (mongoose, models) => {
       }
     }
   });
-
-  // userSchema.pre('save', function(next) {
-  //   this.authentication.password = bcrypt.hashSync(this.authentication.password, bcrypt.genSaltSync(10));
-  //   next();
-  // });
 
   userSchema.methods.hashPassword = function(password) {
     var hash = this.authentication.password = bcrypt.hashSync(password, 8);
